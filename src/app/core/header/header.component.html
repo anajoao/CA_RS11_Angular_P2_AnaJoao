@@ -1,0 +1,71 @@
+<header id="header">
+    <section class="space"></section>
+    <nav id="headerMenu">
+        <ul>
+          <li class="menuItem">
+            <span>Homem</span>
+            <ul class="submenu">
+              <li><a routerLink="homem/casacos">Casacos</a></li>
+              <li><a routerLink="homem/camisas">Camisas</a></li>
+              <li><a routerLink="homem/calcas">Calças</a></li>
+              <li><a routerLink="homem/sweatshirts">Sweatshirts</a></li>
+              <li><a routerLink="homem/polos">Polos</a></li>
+              <li><a routerLink="homem/sapatos">Sapatos</a></li>
+              <li><a routerLink="homem/todos">Todos</a></li>
+            </ul>
+          </li>
+          <span>|</span>
+          <li class="menuItem">
+            <span>Mulher</span>
+            <ul class="submenu">
+              <li><a routerLink="mulher/vestidos">Vestidos</a></li>
+              <li><a routerLink="mulher/blusoes">Blusões</a></li>
+              <li><a routerLink="mulher/coletes">Coletes</a></li>
+              <li><a routerLink="mulher/jeans">Jeans</a></li>
+              <li><a routerLink="mulher/saias">Saias</a></li>
+              <li><a routerLink="mulher/calcoes">Calções</a></li>
+              <li><a routerLink="mulher/lingerie">Lingerie</a></li>
+              <li><a routerLink="mulher/sapatos">Sapatos</a></li>
+              <li><a routerLink="mulher/malas">Malas</a></li>
+              <li><a routerLink="mulher/todos">Todos</a></li>
+            </ul>
+          </li>
+        </ul>
+        <section class="headerLogo">
+          <a routerLink="/">
+            <img src="imagens/logo.png" alt="Logotipo da Loja" />
+          </a>
+        </section>
+        <ul>
+          <li class="menuItem">
+            <span>Criança</span>
+            <ul id="crianca" class="submenu">
+              <li><a routerLink="crianca/menina">Menina | 6-14 Anos</a></li>
+              <li><a routerLink="crianca/menino">Menino | 6-14 Anos</a></li>
+              <li><a routerLink="crianca/bebe-menina">Bebé Menina | 3 Meses - 5 Anos</a></li>
+              <li><a routerLink="crianca/bebe-menino">Bebé Menino | 3 Meses - 5 Anos</a></li>
+              <li><a routerLink="crianca/mini">Mini | 0-12 Meses</a></li>
+            </ul>
+          </li>
+          <span>|</span>
+          <li class="menuItem">
+            <span>Acessórios</span>
+            <ul class="submenu">
+              <li><a routerLink="acessorios/malas">Malas</a></li>
+              <li><a routerLink="acessorios/pulseiras">Pulseiras</a></li>
+              <li><a routerLink="acessorios/aneis">Anéis</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+  
+    <!-- Ícones -->
+    <section class="headerIcons">
+      <i class="fa-regular fa-clipboard" *ngIf="isAuthenticated" (click)="goToWishlist()"></i>
+      <i class="fa-regular fa-user" *ngIf="isAuthenticated" (click)="goToProfile()"></i>
+      <i class="fa-solid fa-arrow-right-from-bracket" *ngIf="isAuthenticated" (click)="logout()"></i>
+      <i class="fa-solid fa-user-plus" *ngIf="!isAuthenticated" (click)="openRegister()"></i>
+      <i class="fa-solid fa-arrow-right-to-bracket" *ngIf="!isAuthenticated" (click)="openLogin()"></i>
+    </section>
+  </header>
+  

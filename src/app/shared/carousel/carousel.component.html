@@ -1,0 +1,14 @@
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carouselTitle">
+      <h1>{{ title }}</h1>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let slide of slides; let i = index" [class.active]="i === 0">
+        <img [src]="slide.image" class="d-block w-100">
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  

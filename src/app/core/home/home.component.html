@@ -1,0 +1,9 @@
+<app-carousel [slides]="homeSlides"></app-carousel>
+<section id="destaquesContainer">
+  <h2 id="destaque">DESTAQUES</h2>
+  <section id="destaquesImg">
+    <section class="produto" *ngFor="let produto of produtosDestaque">
+      <img [src]="'imagens/' + produto.foto_principal" alt="{{ produto.nome }}" (click)="ShowInfo(produto.id)"/>
+    </section>
+  </section>
+</section>

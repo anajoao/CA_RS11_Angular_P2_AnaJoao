@@ -1,0 +1,78 @@
+#header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.space, .headerIcons {
+    flex: 1; 
+}
+
+#headerMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#headerMenu > ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.menuItem {
+    position: relative;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.submenu {
+    display: none; 
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 4px;
+    flex-direction: column;
+    z-index: 10;
+}
+#crianca.submenu {
+    width: 150px;
+}
+.menuItem:hover .submenu {
+    display: flex; 
+}
+
+.submenu li {
+    padding: 5px 15px;
+}
+
+.submenu li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #a0a0a0;
+}
+
+.headerLogo img {
+    width: 99px;
+}
+
+.headerLogo a {
+    cursor: pointer;
+}
+
+
+.headerIcons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}

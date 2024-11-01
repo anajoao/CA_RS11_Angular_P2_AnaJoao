@@ -1,0 +1,61 @@
+/* Container Principal */
+.productDetails {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Marca do Produto */
+  .productBrand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  /* Nome do Produto */
+  .productTitle {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #555;
+    margin-top: 5px;
+  }
+  
+  /* Imagens do Produto */
+  .productImages {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .mainImage,
+  .secondaryImage {
+    width: 200px;
+    height: auto;
+  }
+  
+  /* Detalhes do Produto */
+  .productColor {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .productPrice {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+  }
+  
+  .productDescription {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 15px auto;
+  }
+  

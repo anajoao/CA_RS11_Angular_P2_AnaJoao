@@ -1,0 +1,23 @@
+<section class="productDetails">
+    <h2 class="productBrand">{{ productInfo.marca }}</h2>
+    <h3 class="productTitle">{{ productInfo.nome }}</h3>
+  
+    <div class="productImages">
+      <img
+        [src]="'imagens/' + productInfo.foto_principal"
+        alt="{{ productInfo.nome }}"
+        class="mainImage"
+      />
+      <img
+        *ngIf="productInfo?.foto_secundaria"
+        [src]="'imagens/' + productInfo.foto_secundaria"
+        alt="{{ productInfo.nome }}"
+        class="secondaryImage"
+      />
+    </div>
+  
+    <p class="productColor">{{ productInfo.cor }}</p>
+    <p class="productPrice">{{ productInfo.preco | currency: 'EUR' }}</p>
+    <p class="productDescription">{{ productInfo.descricao }}</p>
+  </section>
+  

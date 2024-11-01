@@ -27,9 +27,12 @@
               }
             ],
             "styles": [
+              "public/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "public/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
