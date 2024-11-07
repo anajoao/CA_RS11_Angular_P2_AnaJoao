@@ -1,0 +1,137 @@
+.productListContainer {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.filter {
+    width: 20%;
+    padding: 20px;
+}
+
+.filter h3 {
+    color: white;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #d35400;
+  }
+  
+  .filter label {
+    margin-left: 5px;
+  }
+
+.productContainer h1 {
+    text-align: center; 
+}
+
+.productContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 80%;
+}
+
+.productList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.productItem {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.productImages {
+    width: 100%;
+}
+
+.mainImage, .secundaryImage {
+    width: 100%;
+}
+
+.secundaryImage {
+    display: none;
+}
+
+.productItem:hover .mainImage {
+    display: none;
+    cursor: pointer;
+}
+
+.productItem:hover .secundaryImage {
+    display: block;
+    cursor: pointer;
+}
+
+.productInfo {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.productInfo h2 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.productInfo p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+button {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+
+@media (max-width: 1024px) {
+    .productList {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+
+@media (max-width: 768px) {
+    .productList {
+        grid-template-columns: repeat(1, 1fr); 
+    }
+
+    .mainImage, .secundaryImage {
+        max-width: 300px; 
+    }
+    .productItem {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.fa-star {
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 10px;
+    color: black; /* Cor padrão */
+    transition: color 0.3s;
+  }
+  
+  .fa-star.in-wishlist {
+    color: red; /* Cor quando o produto está na wishlist */
+  }
+  
+  .fa-star:hover {
+    color: #ff6666; /* Cor ao passar o cursor */
+  }
+  

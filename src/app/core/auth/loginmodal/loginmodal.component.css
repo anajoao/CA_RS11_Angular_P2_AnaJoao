@@ -1,0 +1,118 @@
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.64);
+    z-index: 10;
+    display: flex;
+}
+
+#modalContent {
+    box-sizing: border-box;
+    background-color: white;
+    width: 350px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#modalContent h2 {
+    margin-bottom: 20px;
+}
+
+#btClose {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    border: 2px solid #666;
+    border-radius: 50%;
+    box-shadow: 3px 3px 5px #000;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btClose:hover {
+    background-color: #666;
+    color: white;
+    
+}
+
+#btClose:active {
+    box-shadow: none;
+    top: -11px;
+    right: -13px;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+.formRow label {
+    margin-right: 10px;
+}
+
+.formRow input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+#buttonContainer {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* #validar {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+} */
+
+#buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+/* #validar:hover {
+    background-color: #0056b3; 
+} */
+
+#errorMsg {
+    display: none;
+    margin: 15px 0;
+    font-size: 14px;
+}

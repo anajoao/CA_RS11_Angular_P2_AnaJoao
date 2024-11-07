@@ -1,0 +1,24 @@
+<section id="modal">
+    <section id="modalContent">
+        <h2>Controlo de acessos</h2>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <form id="loginForm" (ngSubmit)="onLogin()">
+            <section class="formRow">
+                <label for="emailInput">E-mail:</label>
+                <input type="text" id="emailInput" class="input" [(ngModel)]="email" name="email" required>
+            </section>
+
+            <section class="formRow">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" class="input" [(ngModel)]="password" name="password" required>
+            </section>
+
+            <section id="buttonContainer">
+                <button type="submit">Validar</button>
+            </section>
+        </form>
+        <span id="btClose" (click)="closeModal()">x</span> 
+    </section>
+</section>
+
+

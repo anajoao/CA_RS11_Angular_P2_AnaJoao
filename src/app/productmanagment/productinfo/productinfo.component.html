@@ -9,15 +9,15 @@
         class="mainImage"
       />
       <img
-        *ngIf="productInfo?.foto_secundaria"
+        *ngIf="productInfo.foto_secundaria"
         [src]="'imagens/' + productInfo.foto_secundaria"
         alt="{{ productInfo.nome }}"
         class="secondaryImage"
       />
     </div>
   
-    <p class="productColor">{{ productInfo.cor }}</p>
-    <p class="productPrice">{{ productInfo.preco | currency: 'EUR' }}</p>
+    <p class="productColor">{{ productInfo.tipo_de_produto + ' ' + productInfo.cor }}</p>
+    <p class="productPrice">{{ productInfo.preco + '€' }}</p>
     <p class="productDescription">{{ productInfo.descricao }}</p>
   </section>
   

@@ -74,5 +74,14 @@
 .headerIcons {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 15px;
 }
+
+.headerIcons i {
+    cursor: pointer;
+}
+
+.welcomeMessage {
+    margin-right: 10px;
+  }

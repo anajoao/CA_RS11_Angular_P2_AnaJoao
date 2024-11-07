@@ -1,0 +1,28 @@
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.remove-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+  
+  

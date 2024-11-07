@@ -5,12 +5,12 @@
           <li class="menuItem">
             <span>Homem</span>
             <ul class="submenu">
-              <li><a routerLink="homem/casacos">Casacos</a></li>
-              <li><a routerLink="homem/camisas">Camisas</a></li>
-              <li><a routerLink="homem/calcas">Calças</a></li>
-              <li><a routerLink="homem/sweatshirts">Sweatshirts</a></li>
-              <li><a routerLink="homem/polos">Polos</a></li>
-              <li><a routerLink="homem/sapatos">Sapatos</a></li>
+              <li><a>Casacos</a></li>
+              <li><a>Camisas</a></li>
+              <li><a>Calças</a></li>
+              <li><a>Sweatshirts</a></li>
+              <li><a>Polos</a></li>
+              <li><a>Sapatos</a></li>
               <li><a routerLink="homem/todos">Todos</a></li>
             </ul>
           </li>
@@ -18,16 +18,16 @@
           <li class="menuItem">
             <span>Mulher</span>
             <ul class="submenu">
-              <li><a routerLink="mulher/vestidos">Vestidos</a></li>
-              <li><a routerLink="mulher/blusoes">Blusões</a></li>
-              <li><a routerLink="mulher/coletes">Coletes</a></li>
-              <li><a routerLink="mulher/jeans">Jeans</a></li>
-              <li><a routerLink="mulher/saias">Saias</a></li>
-              <li><a routerLink="mulher/calcoes">Calções</a></li>
-              <li><a routerLink="mulher/lingerie">Lingerie</a></li>
-              <li><a routerLink="mulher/sapatos">Sapatos</a></li>
-              <li><a routerLink="mulher/malas">Malas</a></li>
-              <li><a routerLink="mulher/todos">Todos</a></li>
+              <li><a>Vestidos</a></li>
+              <li><a>Blusões</a></li>
+              <li><a>Coletes</a></li>
+              <li><a>Jeans</a></li>
+              <li><a>Saias</a></li>
+              <li><a>Calções</a></li>
+              <li><a>Lingerie</a></li>
+              <li><a>Sapatos</a></li>
+              <li><a>Malas</a></li>
+              <li><a>Todos</a></li>
             </ul>
           </li>
         </ul>
@@ -40,11 +40,11 @@
           <li class="menuItem">
             <span>Criança</span>
             <ul id="crianca" class="submenu">
-              <li><a routerLink="crianca/menina">Menina | 6-14 Anos</a></li>
-              <li><a routerLink="crianca/menino">Menino | 6-14 Anos</a></li>
-              <li><a routerLink="crianca/bebe-menina">Bebé Menina | 3 Meses - 5 Anos</a></li>
-              <li><a routerLink="crianca/bebe-menino">Bebé Menino | 3 Meses - 5 Anos</a></li>
-              <li><a routerLink="crianca/mini">Mini | 0-12 Meses</a></li>
+              <li><a>Menina | 6-14 Anos</a></li>
+              <li><a>Menino | 6-14 Anos</a></li>
+              <li><a>Bebé Menina | 3 Meses - 5 Anos</a></li>
+              <li><a>Bebé Menino | 3 Meses - 5 Anos</a></li>
+              <li><a>Mini | 0-12 Meses</a></li>
             </ul>
           </li>
           <span>|</span>
@@ -61,11 +61,16 @@
   
     <!-- Ícones -->
     <section class="headerIcons">
+      <span *ngIf="isAuthenticated" class="welcomeMessage">
+        Bem-vindo(a), {{ userName }}
+      </span>
+      <i class="fa-solid fa-cart-shopping" *ngIf="isAuthenticated"></i>
       <i class="fa-regular fa-clipboard" *ngIf="isAuthenticated" (click)="goToWishlist()"></i>
       <i class="fa-regular fa-user" *ngIf="isAuthenticated" (click)="goToProfile()"></i>
       <i class="fa-solid fa-arrow-right-from-bracket" *ngIf="isAuthenticated" (click)="logout()"></i>
       <i class="fa-solid fa-user-plus" *ngIf="!isAuthenticated" (click)="openRegister()"></i>
-      <i class="fa-solid fa-arrow-right-to-bracket" *ngIf="!isAuthenticated" (click)="openLogin()"></i>
+      <i class="fa-solid fa-arrow-right-to-bracket" *ngIf="!isAuthenticated" (click)="openLoginModal()"></i>
     </section>
+    <app-loginmodal *ngIf="isLoginModalOpen" (close)="closeLoginModal()"></app-loginmodal>
   </header>
   

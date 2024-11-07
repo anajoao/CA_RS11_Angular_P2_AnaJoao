@@ -21,7 +21,6 @@ export interface Produto {
     morada: string;
     codigo_postal: string;
     pais: string;
-    ativo: boolean;
     admin: boolean;
   }
   

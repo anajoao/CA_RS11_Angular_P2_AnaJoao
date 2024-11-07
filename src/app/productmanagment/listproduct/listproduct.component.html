@@ -1,1 +1,43 @@
-<p>listproduct works!</p>
+<section class="productListContainer">
+    <section class="filter">
+        <h3>Tipo</h3>
+        <div *ngFor="let tipo of ['Calças', 'Camisa', 'Casaco', 'T-Shirt', 'Sweatshirt', 'Todos']">
+          <input 
+            type="radio" 
+            name="tipo" 
+            [value]="tipo" 
+            [(ngModel)]="filtro.tipo" 
+            (change)="aplicarFiltros()">
+          <label>{{ tipo }}</label>
+        </div>
+      
+        <h3>Cor</h3>
+        <div *ngFor="let cor of ['Azul', 'Cinza', 'Laranja', 'Preto', 'Todos']">
+          <input 
+            type="radio" 
+            name="cor" 
+            [value]="cor" 
+            [(ngModel)]="filtro.cor" 
+            (change)="aplicarFiltros()">
+          <label>{{ cor }}</label>
+        </div>
+      </section>
+    <section class="productContainer">
+        <h1>Homem</h1>
+        <p>Total de resultados: {{ totalProdutos }}</p> 
+        <section class="productList"> 
+            <section *ngFor="let produto of produtosVisiveis" class="productItem">
+              
+                <img class="mainImage" [src]="'imagens/' + produto.foto_principal" (click)="ShowInfo(produto.id)"/>
+                <img class="secundaryImage" [src]="'imagens/' + produto.foto_secundaria" (click)="ShowInfo(produto.id)"/>
+                
+                <section class="productInfo">
+                    <h2>{{ produto.marca }}</h2>
+                    <p>{{ produto.nome }}</p>
+                    <p>{{ produto.preco }}€</p>
+                </section>
+            </section>
+        </section>
+        <button *ngIf="produtosVisiveis.length < totalProdutos" (click)="carregarMais()">Ver Mais</button>
+    </section>
+</section>

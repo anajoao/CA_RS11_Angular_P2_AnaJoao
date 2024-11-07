@@ -1,47 +1,60 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { LoginmodalComponent } from "../auth/loginmodal/loginmodal.component";
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoginmodalComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  // Variável para controlar o estado de autenticação do usuário
-  isAuthenticated = false;
+  isAuthenticated = false; 
+  isLoginModalOpen = false; 
+  userName: string = "";
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  // Método para abrir o modal de login
-  openLogin() {
-    // Lógica para abrir o modal de login
-    console.log("Abrir modal de login");
+  ngOnInit(): void {
+    
+    this.authService.isAuthenticated().subscribe(status => {
+      this.isAuthenticated = status;
+      if (status) {
+    
+        this.authService.user().subscribe(user => {
+          this.userName = user ? user.nome : ""; 
+        });
+      } else {
+        this.userName = ""; 
+      }
+    });
   }
 
-  // Método para abrir o modal de registro
+  openLoginModal() {
+    this.isLoginModalOpen = true;
+  }
+
+  closeLoginModal() {
+    this.isLoginModalOpen = false;
+  }
+
   openRegister() {
-    // Lógica para abrir o modal de registro
-    console.log("Abrir modal de registro");
+    this.router.navigate(['/register']);
   }
 
-  // Método para navegar para a página de perfil do usuário
   goToProfile() {
-    this.router.navigate(['/perfil']);
+    this.router.navigate(['/profile']);
   }
 
-  // Método para navegar para a página de wishlist do usuário
   goToWishlist() {
     this.router.navigate(['/wishlist']);
   }
 
-  // Método para realizar o logout do usuário
   logout() {
-    this.isAuthenticated = false;
-    // Redireciona para a página inicial após o logout
-    this.router.navigate(['/']);
-    console.log("Usuário deslogado");
+    this.authService.logout(); 
+    this.router.navigate(['/']); 
   }
 }

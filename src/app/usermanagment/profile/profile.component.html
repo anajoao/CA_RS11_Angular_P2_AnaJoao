@@ -1,0 +1,108 @@
+<section class="profileContainer">
+    <h2>Perfil</h2>
+    
+    <!-- Display Mode -->
+    <section *ngIf="!isEditing" class="profileDisplay">
+        <section class="profileField">
+            <label>Nome:</label>
+            <span> {{ user.nome }}</span>
+        </section>
+        <section class="profileField">
+            <label>E-mail:</label>
+            <span> {{ user.email }}</span>
+        </section>
+        <section class="profileField">
+            <label>Senha:</label>
+            <span> {{ '*'.repeat(user.senha.length) }}</span>
+        </section>
+        <section class="profileField">
+            <label>Morada:</label>
+            <span> {{ user.morada }}</span>
+        </section>
+        <section class="profileField">
+            <label>Código Postal:</label>
+            <span> {{ user.codigo_postal }}</span>
+        </section>
+        <section class="profileField">
+            <label>País:</label>
+            <span> {{ user.pais }}</span>
+        </section>
+        <button class="editButton" (click)="toggleEdit()">Alterar informação</button>
+    </section>
+    
+    <!-- Edit Mode -->
+    <form [formGroup]="profileForm" *ngIf="isEditing" (ngSubmit)="saveProfile()" class="profileEdit">
+        <section class="profileEditField">
+            <label for="nome">Nome:</label>
+            <section class="inputContainer">
+                <input type="text" id="nome" formControlName="nome" class="editInput">
+                <small *ngIf="profileForm.get('nome')?.touched && profileForm.get('nome')?.invalid" class="errorMessage">
+                    O campo 'Nome' é de preenchimento obrigatório.
+                </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="email">E-mail:</label>
+            <section class="inputContainer">
+                <input type="email" id="email" formControlName="email" class="editInput">
+                <small *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid" class="errorMessage">
+                    Insira um e-mail válido.
+                </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="senha">Senha:</label>
+            <section class="inputContainer">
+                <input type="password" id="senha" formControlName="senha" class="editInput">
+                <small *ngIf="profileForm.get('senha')?.touched && profileForm.get('senha')?.invalid" class="errorMessage">
+                    A senha deve ter pelo menos 8 caracteres.
+                </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="confirmPassword">Confirme a senha:</label>
+            <section class="inputContainer">
+                <input type="password" id="confirmPassword" formControlName="confirmPassword" class="editInput">
+                <small *ngIf="profileForm.hasError('passwordMismatch') && profileForm.get('confirmPassword')?.touched" class="errorMessage">
+                    É obrigatório confirmar a senha atual ou alterada!
+                  </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="morada">Morada:</label>
+            <section class="inputContainer">
+                <input type="text" id="morada" formControlName="morada" class="editInput">
+                <small *ngIf="profileForm.get('morada')?.touched && profileForm.get('morada')?.invalid" class="errorMessage">
+                    Morada é obrigatória.
+                </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="codigo_postal">Código Postal:</label>
+            <section class="inputContainer">
+                <input type="text" id="codigo_postal" formControlName="codigo_postal" class="editInput">
+                <small *ngIf="profileForm.get('codigo_postal')?.touched && profileForm.get('codigo_postal')?.invalid" class="error-message">
+                    Código postal é obrigatório.
+                </small>
+            </section>
+        </section>
+
+        <section class="profileEditField">
+            <label for="pais">País:</label>
+            <section class="inputContainer">
+                <input type="text" id="pais" formControlName="pais" class="editInput">
+                <small *ngIf="profileForm.get('pais')?.touched && profileForm.get('pais')?.invalid" class="error-message">
+                    País é obrigatório.
+                </small>
+            </section>
+        </section>
+
+        <button type="submit" [disabled]="profileForm.invalid" class="saveButton">Guardar alterações</button>
+        <button type="button" (click)="toggleEdit()" class="cancelButton">Voltar atrás</button>
+    </form>
+</section>
