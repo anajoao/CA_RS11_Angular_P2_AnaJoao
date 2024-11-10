@@ -73,7 +73,6 @@ export class ShoppingcartService {
         const itemToRemove = items.find(item => item.produtoId === productId);
         if (itemToRemove) {
           this.http.delete<void>(`${this.cartUrl}/${itemToRemove.id}`).subscribe(() => {
-            // Atualiza o estado local e o sessionStorage
             this.produtosNoCarrinho = this.produtosNoCarrinho.filter(id => id !== productId);
           });
         } else {

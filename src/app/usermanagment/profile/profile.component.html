@@ -2,7 +2,7 @@
     <h2>Perfil</h2>
     
     <!-- Display Mode -->
-    <section *ngIf="!isEditing" class="profileDisplay">
+    <section *ngIf="!isEditing && !isEditingPassword" class="profileDisplay">
         <section class="profileField">
             <label>Nome:</label>
             <span> {{ user.nome }}</span>
@@ -28,6 +28,7 @@
             <span> {{ user.pais }}</span>
         </section>
         <button class="editButton" (click)="toggleEdit()">Alterar informação</button>
+        <button class="editButton" (click)="toggleEditPassword()">Alterar senha</button>
     </section>
     
     <!-- Edit Mode -->
@@ -86,7 +87,7 @@
             <label for="codigo_postal">Código Postal:</label>
             <section class="inputContainer">
                 <input type="text" id="codigo_postal" formControlName="codigo_postal" class="editInput">
-                <small *ngIf="profileForm.get('codigo_postal')?.touched && profileForm.get('codigo_postal')?.invalid" class="error-message">
+                <small *ngIf="profileForm.get('codigo_postal')?.touched && profileForm.get('codigo_postal')?.invalid" class="errorMessage">
                     Código postal é obrigatório.
                 </small>
             </section>
@@ -96,7 +97,7 @@
             <label for="pais">País:</label>
             <section class="inputContainer">
                 <input type="text" id="pais" formControlName="pais" class="editInput">
-                <small *ngIf="profileForm.get('pais')?.touched && profileForm.get('pais')?.invalid" class="error-message">
+                <small *ngIf="profileForm.get('pais')?.touched && profileForm.get('pais')?.invalid" class="errorMessage">
                     País é obrigatório.
                 </small>
             </section>
@@ -105,4 +106,22 @@
         <button type="submit" [disabled]="profileForm.invalid" class="saveButton">Guardar alterações</button>
         <button type="button" (click)="toggleEdit()" class="cancelButton">Voltar atrás</button>
     </form>
+
+    <form [formGroup]="passwordForm" *ngIf="isEditingPassword" (ngSubmit)="savePassword()">
+        <section class="profileEditField">
+          <label for="senha">Nova Senha:</label>
+          <input type="password" id="senha" formControlName="senha" class="editInput">
+        </section>
+        <section class="profileEditField">
+          <label for="confirmPassword">Confirme a senha:</label>
+          <section class="inputContainer">
+              <input type="password" id="confirmPassword" formControlName="confirmPassword" class="editInput">
+              <small *ngIf="passwordForm.get('confirmPassword')?.touched && passwordForm.hasError('passwordMismatch')" class="errorMessage">
+                As senhas não coincidem.
+              </small>
+          </section>
+        </section>
+        <button type="submit" [disabled]="passwordForm.invalid" class="saveButton">Atualizar Senha</button>
+        <button type="button" (click)="toggleEditPassword()" class="cancelButton">Cancelar</button>
+      </form>
 </section>

@@ -45,8 +45,4 @@ export class RegisterComponent {
       );
     }
   }
-
-  // get senha() {
-  //   return this.registerForm.get('senha');
-  // }
 }

@@ -14,7 +14,9 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class ProfileComponent {
   user!: Utilizador;
   profileForm: FormGroup;
+  passwordForm: FormGroup;
   isEditing = false;
+  isEditingPassword = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.profileForm = this.fb.group({
@@ -25,6 +27,11 @@ export class ProfileComponent {
       morada: ['', Validators.required],
       codigo_postal: ['', Validators.required],
       pais: ['', Validators.required]
+    }, { validators: this.passwordsMatchValidator });
+
+    this.passwordForm = this.fb.group({
+      senha: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['']
     }, { validators: this.passwordsMatchValidator });
   }
 
@@ -46,9 +53,16 @@ export class ProfileComponent {
     }
   }
 
+  toggleEditPassword(): void {
+    this.isEditingPassword = !this.isEditingPassword;
+    if (!this.isEditingPassword) {
+      this.passwordForm.reset();
+    }
+  }
+
   saveProfile(): void {
     if (this.profileForm.valid) {
-      const updatedUser = { ...this.user, ...this.profileForm.value };
+      let updatedUser = { ...this.user, ...this.profileForm.value };
       this.authService.updateUser(updatedUser).subscribe(() => {
         this.user = updatedUser;
         this.isEditing = false;
@@ -57,9 +71,24 @@ export class ProfileComponent {
     }
   }
 
+  savePassword(): void {
+    if (this.passwordForm.valid) {
+      let newPassword = this.passwordForm.get('senha')?.value;
+      let updatedUser = { ...this.user, senha: newPassword };
+      
+      this.authService.updateUser(updatedUser).subscribe(() => {
+        this.user = updatedUser;
+        this.isEditingPassword = false;
+        alert("Senha atualizada com sucesso!");
+
+        this.passwordForm.reset();
+      });
+    }
+  }
+
   passwordsMatchValidator(form: FormGroup): { [key: string]: boolean } | null {
-    const password = form.get('senha')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
+    let password = form.get('senha')?.value;
+    let confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 }

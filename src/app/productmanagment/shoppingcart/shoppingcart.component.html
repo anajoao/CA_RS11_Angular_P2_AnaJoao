@@ -1,24 +1,6 @@
 <h2 class="cartTitle">Carrinho de Compras</h2>
 
-<!-- <section *ngIf="cartProducts.length === 0" class="emptyMessage">
-  O seu carrinho está vazio.
-</section>
-
-<section class="cartContainer">
-  <section *ngFor="let produto of cartProducts" class="cartItem">
-    <img [src]="'imagens/' + produto.foto_principal" alt="{{ produto.nome }}" class="productImage">
-
-    <section class="productDetails">
-      <h3 class="productBrand">{{ produto.marca }}</h3>
-      <p class="productName">{{ produto.nome }}</p>
-      <p class="productPrice"><strong>{{ produto.preco }}€</strong></p>
-    </section>
-
-    <button (click)="removeFromCart(produto.id)" class="removeButton">Remover</button>
-  </section>
-</section> -->
-
-<p *ngIf="cartProducts && cartProducts.length === 0">Não há produtos no carrinho.</p>
+<p *ngIf="cartProducts && cartProducts.length === 0" class="emptyMessage">Não há produtos no carrinho.</p>
 
 <ng-container *ngIf="cartProducts && cartProducts.length > 0">
   <p>Total de produtos no carrinho: {{ cartProducts.length }}</p>
@@ -31,7 +13,7 @@
         <th>Marca</th>
         <th>Produto</th>
         <th>Preço</th>
-        <th>Operações</th>
+        <th>Eliminar</th>
       </tr>
     </thead>
     <tbody>

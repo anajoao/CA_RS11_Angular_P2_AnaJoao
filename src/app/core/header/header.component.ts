@@ -61,12 +61,10 @@ export class HeaderComponent {
   }
 
   openLogoutModal() {
-    // Abre a modal de confirmação de logout
     this.isLogoutModalOpen = true;
   }
 
   closeLogoutModal() {
-    // Fecha a modal de confirmação de logout
     this.isLogoutModalOpen = false;
   }
 }

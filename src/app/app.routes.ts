@@ -6,6 +6,7 @@ import { WishlistComponent } from './productmanagment/wishlist/wishlist.componen
 import { RegisterComponent } from './usermanagment/register/register.component';
 import { ProfileComponent } from './usermanagment/profile/profile.component';
 import { ShoppingcartComponent } from './productmanagment/shoppingcart/shoppingcart.component';
+import { NotfoundComponent } from './core/notfound/notfound.component';
 
 export const routes: Routes = [
     { path : '', component: HomeComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'wishlist/:id', component: WishlistComponent },
     { path: 'shoppingcart/:id', component: ShoppingcartComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent }
+    { path: 'profile', component: ProfileComponent },
+    { path : '**', component: NotfoundComponent}
 ];
