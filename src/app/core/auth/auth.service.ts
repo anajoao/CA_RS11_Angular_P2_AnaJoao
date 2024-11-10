@@ -9,7 +9,6 @@ import { Utilizador } from '../../model/db.type';
 export class AuthService {
 
   private authUrl = 'http://localhost:3000/utilizadores'; 
-  private authStatus = new BehaviorSubject<boolean>(false); 
   private currentUser = new BehaviorSubject<Utilizador | null>(null); 
 
   private errorHandler(error: HttpErrorResponse){
@@ -30,7 +29,6 @@ export class AuthService {
       map(users => {
         if (users.length > 0) {
           const user = users[0];
-          this.authStatus.next(true);
           this.currentUser.next(user);
           sessionStorage.setItem('currentUser', JSON.stringify(user));
           return true;
@@ -43,14 +41,13 @@ export class AuthService {
 
   
   logout(): void {
-    this.authStatus.next(false);
     this.currentUser.next(null);
-    sessionStorage.removeItem('currentUser'); 
+    sessionStorage.removeItem('currentUser');
   }
 
  
-  isAuthenticated(): Observable<boolean> {
-    return this.authStatus.asObservable();
+  isAuthenticated(): boolean {
+    return this.currentUser.value !== null;
   }
 
  
@@ -60,19 +57,11 @@ export class AuthService {
 
   
   private loadUserFromSessionStorage(): void {
-    let user = sessionStorage.getItem('currentUser');
-    if (user) {
-      let user2 = JSON.parse(user);
-      this.authStatus.next(true); 
-      this.currentUser.next(user2);
+    let userStored = sessionStorage.getItem('currentUser');
+    if (userStored) {
+      // let user = JSON.parse(userStored) as Utilizador;
+      this.currentUser.next(JSON.parse(userStored));
     }
-  }
-
-  checkEmailExists(email: string): Observable<boolean> {
-    return this.http.get<Utilizador[]>(`${this.authUrl}?email=${email}`).pipe(
-      map(users => users.length > 0),
-      catchError(() => of(false))
-    );
   }
 
   registerUser(utilizador: Utilizador): Observable<Utilizador> {
@@ -83,8 +72,12 @@ export class AuthService {
     return this.http.put<Utilizador>(`${this.authUrl}/${user.id}`, user);
   }
 
+  getCurrentUser(): Observable<Utilizador | null> {
+    return this.currentUser.asObservable();
+  }
+
   getCurrentUserId(): number | null {
-    const currentUser2 = this.currentUser.value;
+    let currentUser2 = this.currentUser.value;
     return currentUser2 ? currentUser2.id : null;
   }
 

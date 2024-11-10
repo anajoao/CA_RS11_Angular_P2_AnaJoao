@@ -30,3 +30,9 @@ export interface Produto {
     produtoId: number;    
     userId: number;       
   }
+
+  export interface Shoopingcart {
+    id: number;           
+    produtoId: number;    
+    userId: number;       
+  }

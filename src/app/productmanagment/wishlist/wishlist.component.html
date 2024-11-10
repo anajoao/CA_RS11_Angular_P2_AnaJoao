@@ -1,11 +1,21 @@
-<h2>Wishlist</h2>
-<div *ngFor="let produto of wishlistProducts" class="wishlist-item">
-  <img [src]="'imagens/' + produto.foto_principal" alt="{{ produto.nome }}" class="product-image">
-  <div class="product-details">
-    <h3>{{ produto.nome }}</h3>
-    <p>{{ produto.descricao }}</p>
-    <p><strong>{{ produto.preco }}€</strong></p>
-  </div>
-  <button (click)="removeItem(produto.id)" class="remove-button">Remover</button>
-</div>
+<h2 class="wishlistTitle">Wishlist</h2>
+
+<section *ngIf="wishlistProducts.length === 0" class="emptyMessage">
+  A sua wishlist está vazia.
+</section>
+
+<section class="wishlistContainer">
+  <section *ngFor="let produto of wishlistProducts" class="wishlistItem">
+    <img [src]="'imagens/' + produto.foto_principal" alt="{{ produto.nome }}" class="productImage">
+  
+    <section class="productDetails">
+      <h3 class="productBrand">{{ produto.marca }}</h3>
+      <p class="productName">{{ produto.nome }}</p>
+      <p class="productPrice"><strong>{{ produto.preco }}€</strong></p>
+    </section>
+  
+    <button (click)="removeItem(produto.id)" class="removeButton">Remover</button>
+  </section>
+</section>
+
 

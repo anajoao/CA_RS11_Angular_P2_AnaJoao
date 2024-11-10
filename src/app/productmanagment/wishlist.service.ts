@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, concatMap, forkJoin, map, mergeMap, Observable, switchMap, tap, throwError } from 'rxjs';
+import { catchError, concatMap, forkJoin, map, mergeMap, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { Produto, Wishlist } from '../model/db.type';
 import { ProductserviceService } from './productservice.service';
 
@@ -10,7 +10,7 @@ import { ProductserviceService } from './productservice.service';
 export class WishlistService {
 
   private wishlistUrl = 'http://localhost:3000/wishlist';
-  private productsUrl = 'http://localhost:3000/produtos';
+  private produtosNaWishlist: number[] = [];
 
   constructor(private http: HttpClient, private productService: ProductserviceService) {}
 
@@ -22,24 +22,37 @@ export class WishlistService {
     }
   }
 
-  getUserWishlist(userId: number): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.wishlistUrl}?userId=${userId}`);
+  removeFromWishlist(userId: number, productId: number): Observable<void> {
+    const url = `${this.wishlistUrl}?userId=${userId}&productId=${productId}`;
+
+  // Primeiro, obtém o item da wishlist a ser removido
+    return this.http.get<{ id: number, produtoId: number }[]>(url).pipe(
+      map(items => {
+        const itemToRemove = items.find(item => item.produtoId === productId);
+        
+        if (!itemToRemove) {
+          throw new Error("Item não encontrado na wishlist");
+        }
+
+        // Faz a remoção do item encontrado
+        this.http.delete<void>(`${this.wishlistUrl}/${itemToRemove.id}`).subscribe(() => {
+          // Atualiza o estado local e o sessionStorage
+          this.produtosNaWishlist = this.produtosNaWishlist.filter(id => id !== productId);
+        });
+    }),
+    catchError(this.errorHandler)
+  );
   }
 
-  removeFromWishlist(userId: number, productId: number): Observable<void> {
-    
-    const url = `${this.wishlistUrl}?userId=${userId}&productId=${productId}`;
-  
-  
-    return this.http.get<{ id: number }[]>(url).pipe(
-    
-      switchMap(items => {
-        if (items.length > 0) {
-          const wishlistItemId = items[0].id;
-          return this.http.delete<void>(`${this.wishlistUrl}/${wishlistItemId}`);
+  getAllWishlists(userId: number): Observable<Wishlist[]> {
+    return this.http.get<Wishlist[]>(`${this.wishlistUrl}?userId=${userId}`).pipe(
+      map(wishlist => {
+        console.log('Wishlist recebida:', wishlist);
+        if (Array.isArray(wishlist)) {
+          this.produtosNaWishlist = wishlist.map(item => item.produtoId);
+          return wishlist;
         } else {
-        
-          return throwError(() => new Error("Item não encontrado na wishlist"));
+          throw new Error('Formato de resposta inválido da API');
         }
       }),
       catchError(this.errorHandler)
@@ -47,19 +60,33 @@ export class WishlistService {
   }
 
   getWishlistWithProducts(userId: number): Observable<Produto[]> {
-    return this.http.get<Wishlist[]>(`${this.wishlistUrl}?userId=${userId}`).pipe(
-      mergeMap((wishlistItems: Wishlist[]) => {
-        
-        let productIds = wishlistItems.map(item => item.produtoId);
-  
-    
-        let productRequests = productIds.map(id => this.productService.getProductById(id));
-  
-       
-        return forkJoin(productRequests);
+    return this.getAllWishlists(userId).pipe(
+      map(wishlistItems => {
+        const productIds = wishlistItems.map(item => item.produtoId);
+        let products: Produto[] = [];
+        productIds.forEach(id => {
+          this.productService.getProductById(id).subscribe(prod => {
+            products.push(prod);
+          });
+        });
+        return products;
       }),
       catchError(this.errorHandler)
     );
+    
+  }
+
+  addToWishlist(userId: number, produtoId: number): Observable<Wishlist> {
+    let item = { userId, produtoId };
+    return this.http.post<Wishlist>(this.wishlistUrl, item).pipe(
+      map(response => {this.produtosNaWishlist.push(produtoId);
+        return response;
+      })
+    );
+  }
+
+  isInWishlist(userId: number, produtoId: number): boolean {
+    return this.produtosNaWishlist.includes(produtoId);
   }
 
 }

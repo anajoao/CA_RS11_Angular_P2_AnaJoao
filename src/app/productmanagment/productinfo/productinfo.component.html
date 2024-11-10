@@ -1,4 +1,4 @@
-<section class="productDetails">
+<section *ngIf="productInfo" class="productDetails">
     <h2 class="productBrand">{{ productInfo.marca }}</h2>
     <h3 class="productTitle">{{ productInfo.nome }}</h3>
   
@@ -19,5 +19,19 @@
     <p class="productColor">{{ productInfo.tipo_de_produto + ' ' + productInfo.cor }}</p>
     <p class="productPrice">{{ productInfo.preco + '€' }}</p>
     <p class="productDescription">{{ productInfo.descricao }}</p>
+
+    <ng-container *ngIf="isAuthenticated">
+      <!-- Mostrar mensagem se o produto já estiver no carrinho -->
+      <section *ngIf="isInCart(productInfo.id)" class="inCartMessage">
+        <p>Adicionado ao carrinho</p>
+      </section>
+  
+      <!-- Botão de adicionar ao carrinho -->
+      <button *ngIf="!isInCart(productInfo.id)" (click)="addToCart(productInfo)" class="cartbtn">
+        Adicionar ao Carrinho
+      </button>
+    </ng-container>
   </section>
+
+  <section *ngIf="!productInfo">A carregar informações do produto...</section>
   

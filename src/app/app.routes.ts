@@ -5,13 +5,15 @@ import { ListproductComponent } from './productmanagment/listproduct/listproduct
 import { WishlistComponent } from './productmanagment/wishlist/wishlist.component';
 import { RegisterComponent } from './usermanagment/register/register.component';
 import { ProfileComponent } from './usermanagment/profile/profile.component';
+import { ShoppingcartComponent } from './productmanagment/shoppingcart/shoppingcart.component';
 
 export const routes: Routes = [
     { path : '', component: HomeComponent },
     { path : 'home', redirectTo: '' },
     { path: 'produto/:id', component: ProductinfoComponent },
     { path: 'homem/todos', component: ListproductComponent },
-    { path: 'wishlist', component: WishlistComponent },
+    { path: 'wishlist/:id', component: WishlistComponent },
+    { path: 'shoppingcart/:id', component: ShoppingcartComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent }
 ];

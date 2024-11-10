@@ -62,15 +62,16 @@
     <!-- Ícones -->
     <section class="headerIcons">
       <span *ngIf="isAuthenticated" class="welcomeMessage">
-        Bem-vindo(a), {{ userName }}
+        Bem-vindo(a), {{ currentUser?.nome }}
       </span>
-      <i class="fa-solid fa-cart-shopping" *ngIf="isAuthenticated"></i>
+      <i class="fa-solid fa-cart-shopping" *ngIf="isAuthenticated" (click)="goToShoppingcart()"></i>
       <i class="fa-regular fa-clipboard" *ngIf="isAuthenticated" (click)="goToWishlist()"></i>
       <i class="fa-regular fa-user" *ngIf="isAuthenticated" (click)="goToProfile()"></i>
-      <i class="fa-solid fa-arrow-right-from-bracket" *ngIf="isAuthenticated" (click)="logout()"></i>
+      <i class="fa-solid fa-arrow-right-from-bracket" *ngIf="isAuthenticated" (click)="openLogoutModal()"></i>
       <i class="fa-solid fa-user-plus" *ngIf="!isAuthenticated" (click)="openRegister()"></i>
       <i class="fa-solid fa-arrow-right-to-bracket" *ngIf="!isAuthenticated" (click)="openLoginModal()"></i>
     </section>
     <app-loginmodal *ngIf="isLoginModalOpen" (close)="closeLoginModal()"></app-loginmodal>
+    <app-logoutmodal *ngIf="isLogoutModalOpen" (closeModalEvent)="closeLogoutModal()"></app-logoutmodal>
   </header>
   

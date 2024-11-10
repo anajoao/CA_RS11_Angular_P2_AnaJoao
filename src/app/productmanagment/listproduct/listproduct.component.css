@@ -2,25 +2,37 @@
     display: flex;
     width: 100%;
     gap: 10px;
+    justify-content: center;
 }
 
 .filter {
-    width: 20%;
+    width: 15%;
     padding: 20px;
 }
 
-.filter h3 {
+input {
+    margin-left: 10px;
+}
+
+.filter p {
     color: white;
-    font-weight: bold;
     margin: 0 0 10px 0;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     background-color: #d35400;
   }
   
-  .filter label {
+.filter label {
     margin-left: 5px;
-  }
+}
+
+.filterSection {
+    border: 2px solid black;
+}
+
+.filterSection.cor {
+    border-top: none;
+}
 
 .productContainer h1 {
     text-align: center; 
@@ -30,7 +42,7 @@
     display: flex;
     flex-direction: column;
     margin: 0;
-    width: 80%;
+    width: 70%;
 }
 
 .productList {
@@ -50,21 +62,17 @@
     width: 100%;
 }
 
-.mainImage, .secundaryImage {
-    width: 100%;
-}
-
 .secundaryImage {
-    display: none;
+    display: none; 
 }
 
-.productItem:hover .mainImage {
-    display: none;
+.productImageContainer:hover .mainImage {
+    display: none; 
     cursor: pointer;
 }
 
-.productItem:hover .secundaryImage {
-    display: block;
+.productImageContainer:hover .secundaryImage {
+    display: block; 
     cursor: pointer;
 }
 
@@ -119,19 +127,43 @@ button:hover {
     }
 }
 
-.fa-star {
+.productImageContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.wishlistIcon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     cursor: pointer;
     font-size: 24px;
-    margin-left: 10px;
-    color: black; /* Cor padrão */
-    transition: color 0.3s;
-  }
+    color: black; 
+}
+
+.wishlistIcon.inWishlist {
+    color: red; 
+}
+
+.wishlistIcon:hover {
+    color: rgb(255, 85, 85);
+}
+
+.wishlistIcon:hover::before {
+    content: '\f005'; /* Código unicode para uma estrela preenchida */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; /* Força a usar a versão preenchida */
+}
   
-  .fa-star.in-wishlist {
-    color: red; /* Cor quando o produto está na wishlist */
-  }
-  
-  .fa-star:hover {
-    color: #ff6666; /* Cor ao passar o cursor */
-  }
-  
+.inCartMessage{
+    font-weight: bold;
+    margin-top: 30px;
+    
+}
+
+.cartbtn {
+    border-radius: 6px;
+    padding: 10px;
+    width: fit-content;
+    font-size: 0.7rem;
+}

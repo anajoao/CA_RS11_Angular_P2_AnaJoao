@@ -1,0 +1,56 @@
+<h2 class="cartTitle">Carrinho de Compras</h2>
+
+<!-- <section *ngIf="cartProducts.length === 0" class="emptyMessage">
+  O seu carrinho está vazio.
+</section>
+
+<section class="cartContainer">
+  <section *ngFor="let produto of cartProducts" class="cartItem">
+    <img [src]="'imagens/' + produto.foto_principal" alt="{{ produto.nome }}" class="productImage">
+
+    <section class="productDetails">
+      <h3 class="productBrand">{{ produto.marca }}</h3>
+      <p class="productName">{{ produto.nome }}</p>
+      <p class="productPrice"><strong>{{ produto.preco }}€</strong></p>
+    </section>
+
+    <button (click)="removeFromCart(produto.id)" class="removeButton">Remover</button>
+  </section>
+</section> -->
+
+<p *ngIf="cartProducts && cartProducts.length === 0">Não há produtos no carrinho.</p>
+
+<ng-container *ngIf="cartProducts && cartProducts.length > 0">
+  <p>Total de produtos no carrinho: {{ cartProducts.length }}</p>
+
+  <!-- Tabela com os produtos no carrinho -->
+  <table class="tabelaDados">
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Marca</th>
+        <th>Produto</th>
+        <th>Preço</th>
+        <th>Operações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of cartProducts" (click)="navigateToProduct(product.id)">
+        <td><img [src]="'imagens/' + product.foto_principal" alt="imagem do produto" class="thumbnail"></td>
+        <td>{{ product.marca }}</td>
+        <td>{{ product.nome }}</td>
+        <td>{{ product.preco | currency: 'EUR' }}</td>
+        <td>
+          <button (click)="removeFromCart(product.id, $event)">X</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Total da encomenda: {{ getTotalPrice() + '€' }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</ng-container>
+
+
