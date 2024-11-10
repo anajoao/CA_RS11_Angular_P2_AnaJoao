@@ -1,31 +1,31 @@
 <h2 class="title">Registo</h2>
 
 <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="formContainer">
-  <div class="formGroup">
+  <section class="formGroup">
     <label>Nome:</label>
     <input type="text" formControlName="nome" />
-  </div>
-  <div class="formGroup">
+  </section>
+  <section class="formGroup">
     <label>E-mail:</label>
     <input type="email" formControlName="email" />
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  </div>
-  <div class="formGroup">
+    <section *ngIf="errorMessage" class="error">{{ errorMessage }}</section>
+  </section>
+  <section class="formGroup">
     <label>Senha:</label>
     <input type="password" formControlName="senha" />
     <small>Min. 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um símbolo.</small>
-  </div>
-  <div class="formGroup">
+  </section>
+  <section class="formGroup">
     <label>Morada:</label>
     <input type="text" formControlName="morada" />
-  </div>
-  <div class="formGroup">
+  </section>
+  <section class="formGroup">
     <label>Código Postal:</label>
     <input type="text" formControlName="codigo_postal" />
-  </div>
-  <div class="formGroup">
+  </section>
+  <section class="formGroup">
     <label>País:</label>
     <input type="text" formControlName="pais" />
-  </div>
+  </section>
   <button type="submit" [disabled]="registerForm.invalid">Registar</button>
 </form>

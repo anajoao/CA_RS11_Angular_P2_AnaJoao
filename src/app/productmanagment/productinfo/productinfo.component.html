@@ -2,7 +2,7 @@
     <h2 class="productBrand">{{ productInfo.marca }}</h2>
     <h3 class="productTitle">{{ productInfo.nome }}</h3>
   
-    <div class="productImages">
+    <section class="productImages">
       <img
         [src]="'imagens/' + productInfo.foto_principal"
         alt="{{ productInfo.nome }}"
@@ -14,7 +14,7 @@
         alt="{{ productInfo.nome }}"
         class="secondaryImage"
       />
-    </div>
+    </section>
   
     <p class="productColor">{{ productInfo.tipo_de_produto + ' ' + productInfo.cor }}</p>
     <p class="productPrice">{{ productInfo.preco + '€' }}</p>
